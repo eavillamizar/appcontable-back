@@ -19,11 +19,12 @@ const userRoutes = require("./routes/users");
 app.use(express.json());
 app.use(express.urlencoded({ extend : false })) ;
 app.use(cors());
+require("dotenv").config(); // configurar variable ambiente
 
 // Configuracion de la conexion a la bd
-mongoose.connect(
-    "mongodb+srv://dbUser:RelbXtLOXFoyyQTF@cluster0.ubhsp.mongodb.net/AppContable?retryWrites=true&w=majority"
-    ).then(() => {
+mongoose
+    .connect(process.env.DB_CONNECT)
+    .then(() => {
         console.log("Estamos conectados a nuestra BD");
     }).catch(() => {
         console.log("Miguel Tenemos un Problema");
